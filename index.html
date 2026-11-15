@@ -37,6 +37,10 @@ h2{font-size:15px;margin:0 0 2px}.mute{color:var(--mute);font-size:13px;margin:0
 .fine{font-size:12px;color:var(--mute);line-height:1.5;margin:6px 4px}
 #note{margin-top:12px;font-size:13.5px;color:var(--mute)}#note[hidden]{display:none}
 button.rw{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;text-align:left;border-radius:12px;padding:10px 12px;margin:0 0 8px;background:var(--card);border:1px solid var(--line)}div.rw{display:flex;justify-content:space-between;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 8px}
+.big{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.05}.l4{fill:none;stroke:var(--dn);stroke-width:2}.l2.t{stroke-width:2}
+.pills{display:flex;gap:6px;margin:10px 0 0}.pills button{flex:1;padding:6px 0;font-size:13px;color:var(--mute);background:transparent;border:1px solid transparent}.pills button.on{color:var(--ink);background:var(--bg);border-color:var(--line)}
+.dotg{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--up);margin-right:8px}.dotg.off{background:var(--mute)}
+details>summary{cursor:pointer;list-style:none;margin-bottom:12px;font-size:14px;color:var(--mute)}details>summary::-webkit-details-marker{display:none}
 input{font:inherit;width:100%;box-sizing:border-box;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px;margin-top:4px}
 @media(prefers-reduced-motion:reduce){.bar i{transition:none}}
 </style></head>
@@ -46,6 +50,45 @@ input{font:inherit;width:100%;box-sizing:border-box;background:var(--card);color
  <button id="pz">Pause</button>
 </header>
 
+<section class="card" id="ks" hidden>
+ <h2>Connect data</h2>
+ <p class="mute">Paste your Alpaca paper-trading keys. They stay on this phone only and are never uploaded anywhere except to Alpaca.</p>
+ <label class="fine">Key ID<input id="kid" autocomplete="off" autocapitalize="off"></label>
+ <label class="fine">Secret<input id="ksec" type="password" autocomplete="off"></label>
+ <button id="ksave" style="margin-top:10px">Save and connect</button>
+</section>
+
+<section class="card" id="home">
+ <div class="sub">Paper account</div>
+ <div class="big" id="hb">$–</div>
+ <div class="chg" id="hc" style="margin:4px 0 0">Connect your Alpaca keys to see it</div>
+ <svg viewBox="0 0 360 120" id="hch" role="img" aria-label="Account value over time" style="margin-top:10px"></svg>
+ <div class="pills" id="hp"><button data-p="1D" class="on">1D</button><button data-p="1W">1W</button><button data-p="1M">1M</button><button data-p="1Y">1Y</button></div>
+</section>
+
+<section class="card">
+ <h2>Results so far</h2>
+ <p class="mute">Real closed paper trades from your Alpaca account. Nothing here is estimated or edited.</p>
+ <div class="g">
+  <div><span>Win rate</span><b id="wr2">–</b></div>
+  <div><span>Closed trades</span><b id="wn">0</b></div>
+  <div><span>Average win / loss</span><b id="wal">–</b></div>
+  <div><span>Total profit / loss</span><b id="wpl">–</b></div>
+ </div>
+ <p class="fine" id="wnote">Waiting for your first closed trade.</p>
+ <div class="g" style="margin-top:8px">
+  <div><span>Backtest win rate (simulated)</span><b id="bw">–</b></div>
+  <div><span>Backtest vs holding</span><b id="bv">–</b></div>
+ </div>
+</section>
+
+<section class="card">
+ <h2>Bots</h2>
+ <div id="bots" style="margin-top:8px"></div>
+</section>
+
+<details id="more">
+<summary class="card">More: ideas, scanner, backtest, settings</summary>
 <section class="card">
  <div><span class="px" id="px">–</span><span class="chg" id="chg"></span></div>
  <div class="sub" id="who">DEMO.IDX, simulated · change since page load</div>
@@ -70,13 +113,7 @@ input{font:inherit;width:100%;box-sizing:border-box;background:var(--card);color
  </div>
 </section>
 
-<section class="card" id="ks" hidden>
- <h2>Connect data</h2>
- <p class="mute">Paste your Alpaca paper-trading keys. They stay on this phone only and are never uploaded anywhere except to Alpaca.</p>
- <label class="fine">Key ID<input id="kid" autocomplete="off" autocapitalize="off"></label>
- <label class="fine">Secret<input id="ksec" type="password" autocomplete="off"></label>
- <button id="ksave" style="margin-top:10px">Save and connect</button>
-</section>
+
 
 <section class="card" id="oc" hidden>
  <h2>Suggested contract</h2>
@@ -96,6 +133,7 @@ input{font:inherit;width:100%;box-sizing:border-box;background:var(--card);color
   <label class="fine">Max risk per trade, %<input id="rk" type="number" min="0" step="0.5" value="2"></label>
  </div>
  <p class="fine" id="verdict"></p>
+ <p class="fine" id="plan"></p>
 </section>
 
 <section class="card" id="idc" hidden>
@@ -122,8 +160,8 @@ input{font:inherit;width:100%;box-sizing:border-box;background:var(--card);color
 </section>
 
 <section class="card" id="sc" hidden>
- <h2>Scanner</h2>
- <p class="mute">Daily trend signal as of the last close. Tap one to switch the whole page to it.</p>
+ <h2>Market scanner</h2>
+ <p class="mute">Scans about 80 of the most-traded stocks and ETFs, strongest first, as of the last close. This is not the whole market. Tap one to switch the page to it.</p>
  <div id="scn"></div>
 </section>
 
@@ -150,6 +188,8 @@ input{font:inherit;width:100%;box-sizing:border-box;background:var(--card);color
  <button id="rh">Connect Robinhood</button>
  <div id="note" hidden>Connecting a real account needs a secure backend that holds your credentials and places orders. This page is public front-end code, so it never asks for logins or keys. Robinhood’s official programmatic access is limited, so check their current developer docs before building that layer.</div>
 </section>
+
+</details>
 
 <p class="fine" id="disc">Prices here are randomly generated, not real market data, and every signal and backtest result is illustrative. Options can lose their full premium. This is not financial advice.</p>
 </main>
@@ -197,22 +237,22 @@ function render(){
 }
 
 function bt(p,F,S){
- let eq=1,e=[1],pos=0,ent=1,tr=0,w=0,pk=1,dd=0;
+ let eq=1,e=[1],pos=0,ent=1,tr=0,w=0,pk=1,dd=0,held=0;
  for(let i=S;i<p.length-1;i++){
   const d=side(score(p,i+1,F,S).sc);
   if(d!==pos){if(pos){tr++;if(eq>ent)w++}pos=d;ent=eq}
   const sg=rv(p,i+1),p0=.4*p[i]*sg*5.48,dS=p[i+1]-p[i],g=.4/(p[i]*sg*5.48);
   const r=d?Math.max(-1,(d*.5*dS+.5*g*dS*dS-p0/45)/p0):0;
-  eq*=1+.03*r;e.push(eq);pk=Math.max(pk,eq);dd=Math.min(dd,eq/pk-1);
+  eq*=1+.03*r;if(d)held++;e.push(eq);pk=Math.max(pk,eq);dd=Math.min(dd,eq/pk-1);
  }
  if(pos){tr++;if(eq>ent)w++}
- return{e,tr,w,ret:eq-1,dd};
+ return{e,tr,w,ret:eq-1,dd,held};
 }
 function run(){
  if(paused)return;
  const train=P.slice(0,168);let best=null;
  for(const F of[5,8,12,16])for(const S of[20,30,40]){const b=bt(train,F,S);if(!best||b.ret>best.ret)best={...b,F,S}}
- const o=bt(P.slice(168-best.S),best.F,best.S),L=bt(P.slice(138),10,30),bh=P[P.length-1]/P[168]-1;runs++;
+ const o=bt(P.slice(168-best.S),best.F,best.S),L=bt(P.slice(138),10,30),bh=P[P.length-1]/P[168]-1;HOLD=Math.round(L.held/Math.max(1,L.tr));runs++;$("bw").textContent=L.tr?Math.round(L.w/L.tr*100)+"% of "+L.tr+" trades":"–";$("bv").textContent=pct(L.ret-bh,1);$("bv").className=col(L.ret-bh);
  $("runs").textContent=runs;
  $("bp").textContent=best.F+" / "+best.S;
  $("ins").textContent=pct(best.ret);$("ins").className=col(best.ret);
@@ -257,7 +297,7 @@ async function state(s){
  const price=q?q.price:b.closes[b.closes.length-1],n=b.dates.length,cut=b.dates[n-1]===et(Date.now())?n-1:n;
  try{chain=await memo("c"+s,15e3,()=>alpacaChain(s,price))}catch(e){errors.chain=e.message}
  return{sym:s,price,closes:b.closes.slice(0,cut),src:{bars:"Alpaca",chain:chain?"Alpaca":"none"},chain,macro:null,errors}}
-let SYM=(Q.get("s")||"SPY").toUpperCase().replace(/[^A-Z.]/g,"").slice(0,6),pc=0,IDEAS=[],AC=null,auto=false,busy=false,tk=null,JN=[];
+let HOLD=0,SYM=(Q.get("s")||"SPY").toUpperCase().replace(/[^A-Z.]/g,"").slice(0,6),pc=0,IDEAS=[],AC=null,auto=false,busy=false,tk=null,JN=[];
 try{JN=JSON.parse(localStorage.getItem("jn")||"[]")}catch(e){}
 const logJ=x=>{JN.push(x);try{localStorage.setItem("jn",JSON.stringify(JN.slice(-300)))}catch(e){}};
 const capNow=()=>$("acct").value*$("rk").value/100,money=x=>(x<0?"-$":"$")+Math.abs(x).toFixed(2);
@@ -274,7 +314,7 @@ $("idl").onclick=e=>{const b=e.target.closest("[data-i]");if(!b)return;tk=IDEAS[
 $("tq").oninput=$("tp").oninput=tkMsg;$("tx").onclick=()=>{$("tk").hidden=true};
 async function order(sym,q,p,why){const o=await tr("POST","v2/orders",{symbol:sym,qty:String(q),side:"buy",type:"limit",limit_price:p.toFixed(2),time_in_force:"day"});logJ({t:Date.now(),a:"buy",sym,qty:q,lp:p,why});await loadAcct();return o}
 $("tgo").onclick=async()=>{try{$("tgo").disabled=true;await order(tk.sym,+$("tq").value,+$("tp").value,"manual");$("tk").hidden=true}catch(e){$("tmsg").textContent="Order failed: "+e.message}$("tgo").disabled=false};
-async function loadAcct(){try{const[a,p,c]=await Promise.all([tr("GET","v2/account"),tr("GET","v2/positions"),tr("GET","v2/clock")]);AC={a,p,c};drawAcct()}catch(e){$("am").textContent="Paper account: "+e.message+(/40[13]|forbidden|unauthor/i.test(e.message)?" (use paper keys)":"")}}
+async function loadAcct(){try{const[a,p,c]=await Promise.all([tr("GET","v2/account"),tr("GET","v2/positions"),tr("GET","v2/clock")]);AC={a,p,c};drawAcct();drawHome()}catch(e){$("am").textContent="Paper account: "+e.message+(/40[13]|forbidden|unauthor/i.test(e.message)?" (use paper keys)":"")}}
 function drawAcct(){const a=AC.a,o=AC.p.filter(p=>p.asset_class==="us_option");
  $("am").textContent="Equity "+money(+a.equity)+" · buying power "+money(+a.buying_power)+" · market "+(AC.c.is_open?"open":"closed");
  $("pos").innerHTML=o.map(p=>{const m=occ(p.symbol)||{},pl=+p.unrealized_pl;return '<div class="rw"><span><b>'+(m.root||p.symbol)+" "+(m.type==="C"?"Call ":"Put ")+m.strike+'</b> x'+p.qty+'<br><span class="sub">in '+money(+p.avg_entry_price)+' · now '+money(+p.current_price)+'</span></span><span><b class="'+(pl>=0?"up":"dn")+'">'+money(pl)+'</b> <button data-c="'+p.symbol+'">Close</button></span></div>'}).join("")||'<p class="mute">No open option positions.</p>';
@@ -297,11 +337,34 @@ async function autoStep(){
    const t=IDEAS.find(i=>i.ok&&i.type===(sd>0?"C":"P")&&!AC.p.some(p=>p.symbol===i.sym));
    if(t)await order(t.sym,Math.max(1,Math.floor(capNow()/t.risk)),t.ask,"auto: signal "+sd)}
  }catch(e){$("amsg").textContent="Auto error: "+e.message}finally{busy=false}}
-const WL=["SPY","QQQ","IWM","AAPL","MSFT","NVDA","TSLA","AMZN"];
-async function scan(){const j=await memo("scan",3e5,()=>get(A+"v2/stocks/bars?symbols="+WL.join(",")+"&timeframe=1Day&feed=iex&adjustment=split&limit=10000&start="+new Date(Date.now()-400*864e5).toISOString(),ah()));
+const WL="SPY QQQ IWM DIA XLF XLK XLE XLV XLY XLI XLP XLU SMH GLD TLT AAPL MSFT NVDA AMZN GOOGL META TSLA AMD NFLX AVGO CRM ORCL ADBE INTC QCOM MU COST WMT HD LOW NKE MCD SBUX DIS BA CAT DE GE JPM BAC WFC GS MS C V MA PYPL UNH LLY JNJ PFE MRK ABBV XOM CVX COP KO PEP PG T VZ CSCO IBM UBER SHOP PLTR COIN SOFI F GM".split(" ");
+async function scan(){const j=await memo("scan",3e5,()=>get(A+"v2/stocks/bars?symbols="+WL.join(",")+"&timeframe=1Day&feed=iex&adjustment=split&limit=10000&start="+new Date(Date.now()-110*864e5).toISOString(),ah()));
  const LB={3:"Bullish",2:"Bullish",1:"Leaning bullish",0:"Neutral","-1":"Leaning bearish","-2":"Bearish","-3":"Bearish"};
- $("scn").innerHTML=WL.map(s=>{const c=((j.bars||{})[s]||[]).map(b=>b.c);if(c.length<60)return"";const x=score(c,c.length,10,30);return '<button class="rw" data-s="'+s+'"><span><b>'+s+'</b> $'+c[c.length-1].toFixed(2)+'<br><span class="sub">RSI '+x.r.toFixed(0)+' · momentum '+pct(x.m,1)+'</span></span><b class="'+(x.sc>0?"up":x.sc<0?"dn":"am")+'">'+LB[x.sc]+'</b></button>'}).join("")}
+ const RA=WL.map(s=>{const c=((j.bars||{})[s]||[]).map(b=>b.c);if(c.length<40)return null;return{s,p:c[c.length-1],x:score(c,c.length,10,30)}}).filter(Boolean).sort((a,b)=>Math.abs(b.x.sc)-Math.abs(a.x.sc)||Math.abs(b.x.m)-Math.abs(a.x.m));SCNN=RA.filter(r=>Math.abs(r.x.sc)>=2).length;const R=RA.slice(0,12);
+ $("scn").innerHTML=R.map(({s,p,x})=>'<button class="rw" data-s="'+s+'"><span><b>'+s+'</b> $'+p.toFixed(2)+'<br><span class="sub">'+(x.sc>=2?"Buy a call":x.sc<=-2?"Buy a put":"Skip")+' · strength '+Math.round(Math.abs(x.sc)/3*100)+'% · RSI '+x.r.toFixed(0)+'</span></span><b class="'+(x.sc>0?"up":x.sc<0?"dn":"am")+'">'+LB[x.sc]+'</b></button>').join("")}
 $("scn").onclick=e=>{const b=e.target.closest("[data-s]");if(b){SYM=b.dataset.s;J=null;IDEAS=[];$("oc").hidden=true;$("idc").hidden=true;pull()}};
+let HP="1D",HD=null,WS=null,SCNN=0;const RT={};
+const rate=(k,ms,f)=>{if(Date.now()-(RT[k]||0)>ms){RT[k]=Date.now();f()}};
+const PER={"1D":"period=1D&timeframe=5Min","1W":"period=1W&timeframe=1H","1M":"period=1M&timeframe=1D","1Y":"period=1A&timeframe=1D"};
+async function homeLoad(){try{const h=await tr("GET","v2/account/portfolio/history?"+PER[HP]);HD=(h.equity||[]).filter(x=>x!=null);drawHome()}catch(e){$("hc").textContent="Account: "+e.message}}
+function drawHome(){const a=AC&&AC.a;if(!a)return;const eq=+a.equity,pv=+a.last_equity||eq,d=eq-pv;
+ $("hb").textContent=money(eq);$("hc").textContent=(d>=0?"+":"-")+"$"+Math.abs(d).toFixed(2)+" today ("+pct(d/pv,2)+")";$("hc").className="chg "+col(d);
+ const p=HD||[];if(p.length<2){$("hch").innerHTML="";return}
+ $("hch").innerHTML='<polyline class="'+(p[p.length-1]>=p[0]?"l2 t":"l4")+'" points="'+path(p,360,120,Math.min(...p),Math.max(...p))+'"/>'}
+$("hp").onclick=e=>{const b=e.target.closest("[data-p]");if(!b)return;HP=b.dataset.p;[...$("hp").children].forEach(x=>x.classList.toggle("on",x===b));homeLoad()};
+async function statsLoad(){try{const o=await tr("GET","v2/orders?status=closed&limit=500&direction=asc"),lots={},res=[];
+ for(const x of o.filter(x=>+x.filled_qty>0&&occ(x.symbol))){let q=+x.filled_qty;const pr=+x.filled_avg_price;
+  if(x.side==="buy")(lots[x.symbol]=lots[x.symbol]||[]).push({q,pr});
+  else{let pnl=0,m=0;const L=lots[x.symbol]||[];while(q>0&&L.length){const t=Math.min(q,L[0].q);pnl+=(pr-L[0].pr)*t*100;L[0].q-=t;q-=t;m+=t;if(L[0].q<=0)L.shift()}if(m)res.push(pnl)}}
+ WS=res;drawStats()}catch(e){$("wnote").textContent="Results: "+e.message}}
+function drawStats(){const r=WS||[],n=r.length,w=r.filter(x=>x>0),l=r.filter(x=>x<=0),tot=r.reduce((s,x)=>s+x,0),av=a=>a.length?money(a.reduce((s,x)=>s+x,0)/a.length):"$0";
+ $("wn").textContent=n;$("wr2").textContent=n?Math.round(w.length/n*100)+"%":"–";$("wal").textContent=n?av(w)+" / "+av(l):"–";
+ $("wpl").textContent=n?money(tot):"–";$("wpl").className=tot>=0?"up":"dn";
+ $("wnote").textContent=!n?"Waiting for your first closed trade.":n<30?"Only "+n+" closed trade"+(n>1?"s":"")+" so far. Under 30, a win rate swings by luck, so don't trust it yet.":"A high win rate alone isn't enough. Compare average win to average loss and total profit."}
+function drawBots(){const x=J?score(P,P.length,10,30).sc:0,sd=side(x);
+ const rows=[["Scanner","Watching about 80 stocks and ETFs",SCNN+" strong","up"],["Analyst",J?J.sym+": "+(sd>0?"call setup":sd<0?"put setup":"no setup"):"Waiting for data",J?Math.round(Math.abs(x)/3*100)+"%":"–",sd?"up":"am"],["Executor",auto?"Placing paper trades by itself":"Auto trading is off. Tap to turn on.",auto?"On":"Off",auto?"up":"am"]];
+ $("bots").innerHTML=rows.map((r,i)=>'<button class="rw" data-b="'+i+'"><span><span class="dotg'+(i===2&&!auto?" off":"")+'"></span><b>'+r[0]+'</b><br><span class="sub">'+r[1]+'</span></span><b class="'+r[3]+'">'+r[2]+'</b></button>').join("")}
+$("bots").onclick=e=>{if(e.target.closest('[data-b="2"]')){$("auto").onclick();drawBots()}};
 async function pull(){
  try{
   const j=await state(SYM);
@@ -309,8 +372,8 @@ async function pull(){
   J=j;live=true;P=j.closes.slice(-239).concat(j.price);first=P[P.length-2];
   $("stt").textContent="Live · "+j.src.bars+" prices, "+j.src.chain+" options";
   $("who").textContent=j.sym+" · change vs prior close";
-  $("disc").textContent="Prices come from the sources shown above, and options are usually delayed about 15 minutes. Signals and backtests are illustrative. Options can lose their full premium. This is not financial advice.";
-  chain();render();ideasDraw();scan().catch(()=>{});if(pc++%5===0)loadAcct();autoStep();
+  $("disc").textContent="Prices come from the sources shown above, and options are usually delayed about 15 minutes. Win rates under Results come from your real paper trades. Backtests are simulated. Options can lose their full premium. This is not financial advice.";
+  chain();render();ideasDraw();scan().catch(()=>{});rate("h",6e4,homeLoad);rate("s",3e4,statsLoad);drawBots();drawHome();if(pc++%5===0)loadAcct();autoStep();
  }catch(e){const m=e instanceof TypeError?"the browser blocked the data request":e.message;$("stt").textContent=live?"Data error: "+m:"Demo feed ("+m+")";if(/keys|40[13]/.test(m))$("ks").hidden=false}
 }
 function chain(){
@@ -330,6 +393,7 @@ function chain(){
  if(sp>.1)v.push("The bid/ask gap is "+Math.round(sp*100)+"% of the price, which eats any edge.");
  if(ivp>.25)v.push("Implied vol is well above realized, so these options look expensive.");
  if(n<1)v.push("One contract risks $"+risk.toFixed(0)+", above your $"+cap.toFixed(0)+" limit. Skip it.");
+ $("plan").textContent=sd?"Plan: buy the "+(sd<0?"put":"call")+" at or under the ask. Signal strength "+Math.round(Math.abs(score(P,P.length,10,30).sc)/3*100)+"%. Hold up to about "+Math.max(3,Math.min(15,c.dte-7))+" days. Sell at +60%, cut at -40%, or sooner if the signal flips or 7 days are left. Backtest average hold: "+(HOLD||"?")+" days.":"Plan: no entry right now. Wait for the signal to read Bullish or Bearish.";
  $("verdict").textContent=v.length?v.join(" "):"Passes the basic filters. Paper trade it first and log at least 30 trades before risking real money.";
 }
 $("acct").oninput=$("rk").oninput=()=>chain();
