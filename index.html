@@ -1,404 +1,354 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Options Desk</title>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Options Desk">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0c1016">
-<style>
-:root{--bg:#f4f6f8;--card:#fff;--ink:#11161d;--mute:#667085;--line:#e3e7ec;--up:#0c9a7e;--dn:#dc4a46;--am:#b9791a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1016;--card:#151a22;--ink:#e9edf2;--mute:#8a94a4;--line:#242b35;--up:#2fd3b0;--dn:#ff6c67;--am:#f0b34a;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0c1016;--card:#151a22;--ink:#e9edf2;--mute:#8a94a4;--line:#242b35;--up:#2fd3b0;--dn:#ff6c67;--am:#f0b34a;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}
-main{max-width:520px;margin:0 auto;padding:14px 14px 40px}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-h1{font-size:18px;margin:0;font-weight:650;letter-spacing:-.01em}
-.sub{font-size:12.5px;color:var(--mute);display:flex;align-items:center;gap:6px}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--up)}.off .dot{background:var(--am)}
-button{font:inherit;font-size:13.5px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}
-button:focus-visible{outline:2px solid var(--up);outline-offset:2px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
-.px{font-size:38px;font-weight:650;letter-spacing:-.03em;line-height:1.05}
-.chg{font-size:14px;margin-left:8px}
-.up{color:var(--up)}.dn{color:var(--dn)}.am{color:var(--am)}
-.sig{display:flex;align-items:baseline;justify-content:space-between;margin:14px 0 6px}
-.sig b{font-size:21px;letter-spacing:-.01em}
-.bar{height:5px;border-radius:3px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:currentColor;transition:width .4s}
-.play{color:var(--mute);font-size:13.5px;margin:8px 0 0}
-svg{width:100%;height:auto;display:block}
-.l1{fill:none;stroke:var(--ink);stroke-width:1.6}.l2{fill:none;stroke:var(--up);stroke-width:1.1;opacity:.9}.l3{fill:none;stroke:var(--am);stroke-width:1.1;opacity:.9}
-.g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.g div{border:1px solid var(--line);border-radius:12px;padding:10px 12px}
-.g span{display:block;font-size:12.5px;color:var(--mute)}.g b{font-size:17px}
-h2{font-size:15px;margin:0 0 2px}.mute{color:var(--mute);font-size:13px;margin:0 0 12px}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-.fine{font-size:12px;color:var(--mute);line-height:1.5;margin:6px 4px}
-#note{margin-top:12px;font-size:13.5px;color:var(--mute)}#note[hidden]{display:none}
-button.rw{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;text-align:left;border-radius:12px;padding:10px 12px;margin:0 0 8px;background:var(--card);border:1px solid var(--line)}div.rw{display:flex;justify-content:space-between;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 8px}
-.big{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.05}.l4{fill:none;stroke:var(--dn);stroke-width:2}.l2.t{stroke-width:2}
-.pills{display:flex;gap:6px;margin:10px 0 0}.pills button{flex:1;padding:6px 0;font-size:13px;color:var(--mute);background:transparent;border:1px solid transparent}.pills button.on{color:var(--ink);background:var(--bg);border-color:var(--line)}
-.dotg{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--up);margin-right:8px}.dotg.off{background:var(--mute)}
-details>summary{cursor:pointer;list-style:none;margin-bottom:12px;font-size:14px;color:var(--mute)}details>summary::-webkit-details-marker{display:none}
-input{font:inherit;width:100%;box-sizing:border-box;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px;margin-top:4px}
-@media(prefers-reduced-motion:reduce){.bar i{transition:none}}
-</style></head>
-<body><main>
-<header>
- <div><h1>Options Desk</h1><div class="sub" id="st"><span class="dot"></span><span id="stt">Demo feed, updating every second</span></div></div>
- <button id="pz">Pause</button>
-</header>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1018">
+  <title>Options Desk · Paper Trading</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1018;
+      --panel: #111925;
+      --panel-2: #151f2d;
+      --line: #233145;
+      --muted: #8c9bb0;
+      --text: #edf3fb;
+      --soft: #c4cfdd;
+      --green: #55d6a1;
+      --red: #ff777e;
+      --amber: #e8bd6d;
+      --blue: #83b6ff;
+      --shadow: 0 16px 44px rgba(0,0,0,.22);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(ellipse at 25% -15%, #1d2e43 0, transparent 36%), var(--bg); color: var(--text); }
+    button { font: inherit; }
+    .app { min-height: 100vh; display: grid; grid-template-columns: 238px minmax(0, 1fr); }
+    .sidebar { border-right: 1px solid var(--line); background: rgba(10,15,23,.72); padding: 25px 16px; display: flex; flex-direction: column; gap: 28px; }
+    .brand { display:flex; gap:12px; align-items:center; padding: 0 10px; }
+    .brand-mark { width: 34px; height:34px; border:1px solid #37506c; border-radius:10px; display:grid; place-items:center; color:var(--blue); background:#142235; font-weight:800; }
+    .brand-name { font-size:14px; font-weight:750; letter-spacing:.12em; }
+    .brand-sub { color:var(--muted); font-size:10px; margin-top:3px; letter-spacing:.13em; }
+    .nav-label { color:#64748a; font-size:10px; letter-spacing:.16em; text-transform:uppercase; padding:0 12px; margin-bottom:8px; }
+    .nav { display:grid; gap:5px; }
+    .nav button { border:0; color:#aab8c9; background:transparent; width:100%; text-align:left; border-radius:9px; padding:11px 12px; display:flex; align-items:center; gap:11px; cursor:pointer; font-size:13px; }
+    .nav button.active { color:#eff6ff; background:#18283b; box-shadow: inset 2px 0 var(--blue); }
+    .nav button:hover { background:#172333; color:#fff; }
+    .nav-icon { width:17px; text-align:center; color:#8297b1; font-size:15px; }
+    .sidebar-bottom { margin-top:auto; border:1px solid var(--line); border-radius:12px; padding:14px; background:linear-gradient(145deg,#111c29,#0f1722); }
+    .paper-chip { display:inline-flex; align-items:center; gap:7px; color:var(--green); font-size:10px; font-weight:800; letter-spacing:.12em; }
+    .dot { width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 10px currentColor; }
+    .side-note { color:var(--muted); font-size:11px; line-height:1.55; margin-top:10px; }
+    main { padding: 26px clamp(18px,3.3vw,48px) 50px; max-width: 1600px; width:100%; margin:0 auto; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:30px; }
+    .crumb { color:var(--muted); font-size:12px; }
+    .top-actions { display:flex; gap:10px; align-items:center; }
+    .status-pill { border:1px solid #315340; background:#10251f; color:var(--green); border-radius:999px; padding:7px 11px; display:flex; align-items:center; gap:7px; font-size:11px; font-weight:750; letter-spacing:.06em; }
+    .status-pill.offline { border-color:#57413a; background:#271b1b; color:var(--red); }
+    .btn { border:1px solid #33455b; background:#1a2a3e; color:#ecf4ff; padding:10px 14px; border-radius:9px; cursor:pointer; font-weight:650; font-size:12px; transition:.15s ease; }
+    .btn:hover { border-color:#5e83af; background:#21364f; }
+    .btn.primary { background:#dceaff; border-color:#dceaff; color:#102038; }
+    .btn.primary:hover { background:#fff; }
+    .btn:disabled { opacity:.55; cursor:wait; }
+    .title-row { display:flex; justify-content:space-between; align-items:flex-end; gap:20px; margin-bottom:22px; }
+    h1 { margin:0; font-size:clamp(26px,3vw,36px); letter-spacing:-.04em; font-weight:720; }
+    .subtitle { color:var(--muted); margin-top:8px; font-size:13px; }
+    .updated { color:var(--muted); font-size:11px; white-space:nowrap; }
+    .grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:13px; margin-bottom:16px; }
+    .card { border:1px solid var(--line); border-radius:14px; background:linear-gradient(145deg,rgba(20,30,44,.97),rgba(15,23,34,.97)); box-shadow:var(--shadow); min-width:0; }
+    .metric { padding:17px 18px; }
+    .metric-top { display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-size:11px; }
+    .metric-icon { color:#8096b1; font-size:16px; }
+    .metric-value { font-size:clamp(21px,2.4vw,29px); font-weight:700; letter-spacing:-.04em; margin:13px 0 5px; font-variant-numeric:tabular-nums; }
+    .metric-foot { font-size:11px; color:var(--muted); }
+    .positive { color:var(--green)!important; }
+    .negative { color:var(--red)!important; }
+    .muted { color:var(--muted); }
+    .main-grid { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(300px,.85fr); gap:15px; align-items:start; }
+    .section-card { padding:18px; }
+    .section-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px; }
+    h2 { margin:0; font-size:14px; letter-spacing:-.01em; }
+    .section-kicker { color:var(--muted); font-size:10px; letter-spacing:.09em; text-transform:uppercase; }
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; font-size:12px; white-space:nowrap; }
+    th { color:#8292a8; text-align:right; font-size:10px; text-transform:uppercase; letter-spacing:.08em; font-weight:650; padding:10px 9px; border-bottom:1px solid var(--line); }
+    td { color:#d5deea; text-align:right; padding:13px 9px; border-bottom:1px solid rgba(35,49,69,.65); font-variant-numeric:tabular-nums; }
+    th:first-child, td:first-child { text-align:left; padding-left:2px; }
+    tr:last-child td { border-bottom:0; }
+    .symbol { color:#f4f7fb; font-weight:700; }
+    .sub-symbol { color:var(--muted); font-size:10px; margin-top:3px; }
+    .empty { text-align:center; color:var(--muted); padding:28px 10px; font-size:12px; }
+    .right-stack { display:grid; gap:15px; }
+    .connection-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(35,49,69,.65); font-size:12px; }
+    .connection-row:last-of-type { border-bottom:0; }
+    .row-label { color:var(--muted); }
+    .row-value { color:#e8eff8; font-weight:650; text-align:right; }
+    .risk-bar { height:7px; background:#263346; border-radius:99px; overflow:hidden; margin:10px 0 7px; }
+    .risk-fill { height:100%; width:0%; background:linear-gradient(90deg,#5bd6a3,#e3bd70); border-radius:99px; transition:width .3s; }
+    .risk-caption { display:flex; justify-content:space-between; color:var(--muted); font-size:10px; }
+    .small-copy { color:var(--muted); font-size:11px; line-height:1.6; }
+    .settings-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .setting { border:1px solid rgba(48,66,90,.7); border-radius:10px; padding:11px; background:rgba(9,15,23,.3); }
+    .setting-name { color:var(--muted); font-size:10px; margin-bottom:7px; }
+    .setting-value { color:#eaf1fb; font-size:15px; font-weight:700; font-variant-numeric:tabular-nums; }
+    .scan-panel { margin-top:15px; }
+    .log { min-height:155px; max-height:330px; overflow:auto; padding:14px; background:#090f17; border:1px solid #1d2b3c; border-radius:10px; color:#a9bed5; font:11px/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; white-space:pre-wrap; word-break:break-word; }
+    .log .log-placeholder { color:#65768b; }
+    .notice { margin-top:14px; border:1px solid #574b32; background:rgba(65,49,22,.24); border-radius:10px; padding:12px 14px; color:#d9c59f; font-size:11px; line-height:1.55; }
+    .error-box { display:none; margin:0 0 15px; border:1px solid #694249; background:#27191e; border-radius:10px; padding:13px 15px; color:#ffb1b6; font-size:12px; line-height:1.5; }
+    .error-box.show { display:block; }
+    .footer { margin-top:24px; color:#68788d; font-size:10px; display:flex; justify-content:space-between; gap:10px; }
+    @media(max-width:1100px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .main-grid { grid-template-columns:1fr; } .right-stack { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:720px) { .app { grid-template-columns:1fr; } .sidebar { display:none; } main { padding:18px 14px 35px; } .topbar { margin-bottom:22px; } .title-row { align-items:flex-start; flex-direction:column; } .right-stack { grid-template-columns:1fr; } .top-actions .btn { padding:9px 10px; } .grid { gap:9px; } .metric { padding:13px; } .metric-value { font-size:22px; } .footer { flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">OD</div>
+        <div><div class="brand-name">OPTIONS DESK</div><div class="brand-sub">PAPER TRADING TERMINAL</div></div>
+      </div>
+      <div>
+        <div class="nav-label">Workspace</div>
+        <nav class="nav">
+          <button class="active" type="button"><span class="nav-icon">◫</span>Overview</button>
+          <button type="button" onclick="document.getElementById('positionsCard').scrollIntoView({behavior:'smooth'})"><span class="nav-icon">▤</span>Positions</button>
+          <button type="button" onclick="document.getElementById('scanCard').scrollIntoView({behavior:'smooth'})"><span class="nav-icon">⌁</span>Scanner activity</button>
+          <button type="button" onclick="document.getElementById('riskCard').scrollIntoView({behavior:'smooth'})"><span class="nav-icon">◈</span>Risk controls</button>
+        </nav>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="paper-chip"><span class="dot"></span> PAPER ENVIRONMENT</div>
+        <div class="side-note">This dashboard is connected to Alpaca Paper Trading only. No live-order endpoint is used.</div>
+      </div>
+    </aside>
 
-<section class="card" id="ks" hidden>
- <h2>Connect data</h2>
- <p class="mute">Paste your Alpaca paper-trading keys. They stay on this phone only and are never uploaded anywhere except to Alpaca.</p>
- <label class="fine">Key ID<input id="kid" autocomplete="off" autocapitalize="off"></label>
- <label class="fine">Secret<input id="ksec" type="password" autocomplete="off"></label>
- <button id="ksave" style="margin-top:10px">Save and connect</button>
-</section>
+    <main>
+      <div class="topbar">
+        <div class="crumb">Workspace <span class="muted">/</span> Overview</div>
+        <div class="top-actions">
+          <div id="connectionPill" class="status-pill offline"><span class="dot"></span><span id="connectionLabel">NOT CONNECTED</span></div>
+          <button class="btn" id="refreshBtn" type="button">↻ Refresh</button>
+          <button class="btn primary" id="scanBtn" type="button">Run paper scan ↗</button>
+        </div>
+      </div>
 
-<section class="card" id="home">
- <div class="sub">Paper account</div>
- <div class="big" id="hb">$–</div>
- <div class="chg" id="hc" style="margin:4px 0 0">Connect your Alpaca keys to see it</div>
- <svg viewBox="0 0 360 120" id="hch" role="img" aria-label="Account value over time" style="margin-top:10px"></svg>
- <div class="pills" id="hp"><button data-p="1D" class="on">1D</button><button data-p="1W">1W</button><button data-p="1M">1M</button><button data-p="1Y">1Y</button></div>
-</section>
+      <div class="title-row">
+        <div><h1>Options control room</h1><div class="subtitle">Account health, open risk and signal monitoring in one place.</div></div>
+        <div class="updated" id="updatedAt">Waiting for account connection…</div>
+      </div>
 
-<section class="card">
- <h2>Results so far</h2>
- <p class="mute">Real closed paper trades from your Alpaca account. Nothing here is estimated or edited.</p>
- <div class="g">
-  <div><span>Win rate</span><b id="wr2">–</b></div>
-  <div><span>Closed trades</span><b id="wn">0</b></div>
-  <div><span>Average win / loss</span><b id="wal">–</b></div>
-  <div><span>Total profit / loss</span><b id="wpl">–</b></div>
- </div>
- <p class="fine" id="wnote">Waiting for your first closed trade.</p>
- <div class="g" style="margin-top:8px">
-  <div><span>Backtest win rate (simulated)</span><b id="bw">–</b></div>
-  <div><span>Backtest vs holding</span><b id="bv">–</b></div>
- </div>
-</section>
+      <div class="error-box" id="errorBox"></div>
 
-<section class="card">
- <h2>Bots</h2>
- <div id="bots" style="margin-top:8px"></div>
-</section>
+      <section class="grid" aria-label="Account summary">
+        <div class="card metric"><div class="metric-top"><span>Account equity</span><span class="metric-icon">◉</span></div><div class="metric-value" id="equityValue">—</div><div class="metric-foot" id="accountStatus">Paper account</div></div>
+        <div class="card metric"><div class="metric-top"><span>Today's P/L</span><span class="metric-icon">↗</span></div><div class="metric-value" id="dayPnlValue">—</div><div class="metric-foot" id="dayPnlNote">Compared with prior close</div></div>
+        <div class="card metric"><div class="metric-top"><span>Buying power</span><span class="metric-icon">◫</span></div><div class="metric-value" id="buyingPowerValue">—</div><div class="metric-foot">Account-level buying power</div></div>
+        <div class="card metric"><div class="metric-top"><span>Open option positions</span><span class="metric-icon">▤</span></div><div class="metric-value" id="positionCountValue">—</div><div class="metric-foot" id="optionsLevelNote">Options trading level —</div></div>
+      </section>
 
-<details id="more">
-<summary class="card">More: ideas, scanner, backtest, settings</summary>
-<section class="card">
- <div><span class="px" id="px">–</span><span class="chg" id="chg"></span></div>
- <div class="sub" id="who">DEMO.IDX, simulated · change since page load</div>
- <div class="sig"><b id="lab">–</b><span class="sub" id="conf"></span></div>
- <div class="bar" id="cb"><i id="cbi"></i></div>
- <p class="play" id="play"></p>
-</section>
+      <div class="main-grid">
+        <div class="card section-card" id="positionsCard">
+          <div class="section-head"><div><h2>Open positions</h2><div class="section-kicker" style="margin-top:5px">Live paper account holdings</div></div><span class="muted" id="positionsUpdated">—</span></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Contract</th><th>Side</th><th>Qty</th><th>Market value</th><th>Unrealized P/L</th></tr></thead>
+              <tbody id="positionsBody"><tr><td colspan="5" class="empty">Connect your Alpaca paper account to load positions.</td></tr></tbody>
+            </table>
+          </div>
+        </div>
 
-<section class="card">
- <svg viewBox="0 0 360 150" id="ch" role="img" aria-label="Price with 10 and 30 bar averages"></svg>
- <div class="sub" style="gap:14px;margin-top:6px"><span>Price</span><span class="up">Avg 10</span><span class="am">Avg 30</span></div>
-</section>
+        <div class="right-stack">
+          <div class="card section-card">
+            <div class="section-head"><div><h2>Connection health</h2><div class="section-kicker" style="margin-top:5px">Alpaca API diagnostics</div></div><button class="btn" id="testBtn" type="button">Test connection</button></div>
+            <div class="connection-row"><span class="row-label">Environment</span><span class="row-value">PAPER</span></div>
+            <div class="connection-row"><span class="row-label">API connection</span><span class="row-value" id="apiConnection">Not checked</span></div>
+            <div class="connection-row"><span class="row-label">Market clock</span><span class="row-value" id="marketClock">—</span></div>
+            <div class="connection-row"><span class="row-label">Options level</span><span class="row-value" id="optionLevel">—</span></div>
+            <div class="connection-row"><span class="row-label">Trading blocked</span><span class="row-value" id="tradingBlocked">—</span></div>
+            <p class="small-copy" style="margin:12px 0 0">The browser never receives your API keys. The local server reads them from <code>.env</code> and calls Alpaca from your computer.</p>
+          </div>
 
-<section class="card">
- <div class="g">
-  <div><span>RSI (14)</span><b id="rsi"></b></div>
-  <div><span>Trend, fast vs slow</span><b id="tr"></b></div>
-  <div><span>Realized vol rank</span><b id="vr"></b></div>
-  <div><span>10-bar momentum</span><b id="mo"></b></div>
-  <div><span>Expected 30-day move (1σ)</span><b id="em"></b></div>
-  <div><span>Price vs 100-bar average</span><b id="lt"></b></div>
- </div>
-</section>
+          <div class="card section-card" id="riskCard">
+            <div class="section-head"><div><h2>Risk controls</h2><div class="section-kicker" style="margin-top:5px">Configured paper guardrails</div></div><span class="paper-chip"><span class="dot"></span> ACTIVE</span></div>
+            <div class="settings-grid">
+              <div class="setting"><div class="setting-name">Per-trade risk budget</div><div class="setting-value" id="riskPct">0.50%</div></div>
+              <div class="setting"><div class="setting-name">Max total exposure</div><div class="setting-value" id="totalRiskPct">1.50%</div></div>
+              <div class="setting"><div class="setting-name">Max open positions</div><div class="setting-value" id="maxPositions">3</div></div>
+              <div class="setting"><div class="setting-name">Daily entries</div><div class="setting-value" id="maxEntries">2</div></div>
+              <div class="setting"><div class="setting-name">Maximum spread</div><div class="setting-value" id="maxSpread">8%</div></div>
+              <div class="setting"><div class="setting-name">Target DTE</div><div class="setting-value" id="targetDte">21–45 days</div></div>
+            </div>
+            <div class="risk-bar"><div class="risk-fill" id="riskFill"></div></div>
+            <div class="risk-caption"><span>Estimated long premium at cost</span><span id="riskExposure">—</span></div>
+            <div class="notice">These are software guardrails, not a guarantee against loss. A long option can lose 100% of its premium. Dashboard scans are read-only; scheduled paper automation is controlled separately in GitHub Actions.</div>
+          </div>
+        </div>
+      </div>
 
+      <div class="card section-card scan-panel" id="scanCard">
+        <div class="section-head"><div><h2>Scanner activity</h2><div class="section-kicker" style="margin-top:5px">Latest manual scan · no orders submitted by this dashboard</div></div><span class="muted" id="scanTime">No scan run yet</span></div>
+        <div class="log" id="scanLog"><span class="log-placeholder">Your scan output will appear here. Use “Run paper scan” to check the watchlist and current option positions.</span></div>
+      </div>
 
+      <div class="footer"><span>OPTIONS DESK · LOCAL DASHBOARD · PAPER ONLY</span><span id="footerClock">Waiting for first refresh</span></div>
+    </main>
+  </div>
 
-<section class="card" id="oc" hidden>
- <h2>Suggested contract</h2>
- <p class="mute" id="ocs"></p>
- <div class="g">
-  <div><span>Contract</span><b id="c1"></b></div>
-  <div><span>Bid / ask</span><b id="c2"></b></div>
-  <div><span>Delta · implied vol</span><b id="c3"></b></div>
-  <div><span>Implied vs realized vol</span><b id="c4"></b></div>
-  <div><span>Most you can lose per contract</span><b id="c5"></b></div>
-  <div><span>Contracts within your limit</span><b id="c6"></b></div>
-  <div><span>Price data</span><b id="c7"></b></div>
-  <div><span>Options data delay</span><b id="c8"></b></div>
- </div>
- <div class="g" style="margin-top:10px;gap:10px">
-  <label class="fine">Account size, $<input id="acct" type="number" min="0" value="500"></label>
-  <label class="fine">Max risk per trade, %<input id="rk" type="number" min="0" step="0.5" value="2"></label>
- </div>
- <p class="fine" id="verdict"></p>
- <p class="fine" id="plan"></p>
-</section>
+  <script>
+    const $ = id => document.getElementById(id);
+    let maxTotalRiskPctUi = 0.015;
+    const currency = value => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(Number(value || 0));
+    const percent = value => `${Number(value) >= 0 ? '+' : ''}${(Number(value || 0) * 100).toFixed(2)}%`;
+    const setText = (id, value) => { $(id).textContent = value; };
 
-<section class="card" id="idc" hidden>
- <h2>Ranked ideas</h2>
- <p class="mute">Contracts about 30 days out, best score first. The score is a rule of thumb that penalizes wide spreads, expensive options and big required moves. It does not predict profit. Tap one to open a paper ticket.</p>
- <div id="idl"></div>
- <div id="tk" hidden>
-  <b id="tkt"></b>
-  <div class="g" style="margin-top:8px"><label class="fine">Contracts<input id="tq" type="number" min="1" value="1"></label><label class="fine">Limit price<input id="tp" type="number" step="0.01"></label></div>
-  <p class="fine" id="tmsg"></p>
-  <button id="tgo">Place paper order</button> <button id="tx">Cancel</button>
- </div>
-</section>
+    function showError(message) {
+      const box = $('errorBox');
+      box.textContent = message;
+      box.classList.add('show');
+    }
+    function clearError() { $('errorBox').classList.remove('show'); }
+    function setConnected(connected) {
+      const pill = $('connectionPill');
+      pill.classList.toggle('offline', !connected);
+      setText('connectionLabel', connected ? 'CONNECTED · PAPER' : 'NOT CONNECTED');
+      setText('apiConnection', connected ? 'Authenticated' : 'Disconnected');
+    }
+    function parseContract(symbol) {
+      const match = String(symbol).match(/^([A-Z0-9.]{1,6})(\d{6})([CP])(\d{8})$/);
+      if (!match) return { root: symbol, detail: 'Option contract' };
+      const [, root, date, type, strike] = match;
+      return { root, detail: `${type === 'C' ? 'CALL' : 'PUT'} · ${Number(strike) / 1000} · 20${date.slice(0,2)}-${date.slice(2,4)}-${date.slice(4,6)}` };
+    }
 
-<section class="card" id="pa" hidden>
- <h2>Paper account</h2>
- <p class="mute" id="am">Loading...</p>
- <div id="pos"></div>
- <button id="auto">Auto paper trading: Off</button>
- <p class="fine" id="amsg"></p>
- <h2 style="margin-top:14px">Trade journal</h2>
- <p class="mute" id="jn"></p>
- <p class="fine">All orders go to Alpaca's paper-trading service. No real money can be used here. Auto mode only runs while this page is open and the market is open.</p>
-</section>
+    async function loadSummary() {
+      $('refreshBtn').disabled = true;
+      $('testBtn').disabled = true;
+      try {
+        const response = await fetch('/api/summary', { cache: 'no-store' });
+        const data = await response.json();
+        if (!response.ok || !data.connected) {
+          setConnected(false);
+          setText('marketClock', 'Unavailable');
+          setText('optionLevel', 'Unavailable');
+          showError(data.error || 'Could not connect to Alpaca.');
+          $('positionsBody').innerHTML = '<tr><td colspan="5" class="empty">No account data. Add your PAPER API keys to the local .env file, restart the server, then test again.</td></tr>';
+          return;
+        }
+        clearError();
+        setConnected(true);
+        const account = data.account;
+        const day = account.lastEquity > 0 ? account.equity / account.lastEquity - 1 : 0;
+        setText('equityValue', currency(account.equity));
+        setText('accountStatus', `${account.status} · ${account.currency}`);
+        setText('dayPnlValue', percent(day));
+        $('dayPnlValue').classList.toggle('positive', day >= 0);
+        $('dayPnlValue').classList.toggle('negative', day < 0);
+        setText('dayPnlNote', `${currency(account.equity - account.lastEquity)} vs prior close`);
+        setText('buyingPowerValue', currency(account.buyingPower));
+        setText('positionCountValue', String(data.positions.length));
+        setText('optionsLevelNote', `Effective options level ${account.optionsTradingLevel} · approved ${account.optionsApprovedLevel}`);
+        setText('marketClock', data.marketOpen ? 'OPEN' : 'CLOSED');
+        $('marketClock').className = `row-value ${data.marketOpen ? 'positive' : 'muted'}`;
+        setText('optionLevel', `${account.optionsTradingLevel} / 3`);
+        setText('tradingBlocked', account.tradingBlocked ? 'Yes' : 'No');
+        $('tradingBlocked').className = `row-value ${account.tradingBlocked ? 'negative' : 'positive'}`;
+        renderPositions(data.positions);
+        updateExposure(data.positions, account.equity);
+        setText('updatedAt', `Last updated ${new Date(data.updatedAt).toLocaleTimeString()}`);
+        setText('positionsUpdated', 'Just now');
+        setText('footerClock', `Updated ${new Date(data.updatedAt).toLocaleString()}`);
+      } catch (error) {
+        setConnected(false);
+        showError(`Dashboard server error: ${error.message}`);
+      } finally {
+        $('refreshBtn').disabled = false;
+        $('testBtn').disabled = false;
+      }
+    }
 
-<section class="card" id="sc" hidden>
- <h2>Market scanner</h2>
- <p class="mute">Scans about 80 of the most-traded stocks and ETFs, strongest first, as of the last close. This is not the whole market. Tap one to switch the page to it.</p>
- <div id="scn"></div>
-</section>
+    function renderPositions(positions) {
+      if (!positions.length) {
+        $('positionsBody').innerHTML = '<tr><td colspan="5" class="empty">No open option positions.</td></tr>';
+        return;
+      }
+      $('positionsBody').innerHTML = positions.map(position => {
+        const contract = parseContract(position.symbol);
+        const pnl = Number(position.unrealizedPl || 0);
+        const qty = Number(position.qty || 0);
+        const pnlPct = position.avgEntryPrice * Math.abs(qty) * 100 > 0 ? pnl / (position.avgEntryPrice * Math.abs(qty) * 100) : 0;
+        return `<tr>
+          <td><div class="symbol">${escapeHtml(contract.root)}</div><div class="sub-symbol">${escapeHtml(contract.detail)}</div></td>
+          <td>${escapeHtml(position.side)}</td>
+          <td>${escapeHtml(position.qty)}</td>
+          <td>${currency(position.marketValue)}</td>
+          <td class="${pnl >= 0 ? 'positive' : 'negative'}">${currency(pnl)}<div class="sub-symbol">${percent(pnlPct)}</div></td>
+        </tr>`;
+      }).join('');
+    }
 
-<section class="card">
- <h2>Self-backtest</h2>
- <p class="mute">Re-tunes on the first 70% of the window, then scores on the unseen last 30%, every 2 seconds. Runs so far: <b id="runs">0</b></p>
- <svg viewBox="0 0 360 90" id="eq" role="img" aria-label="Out-of-sample equity curve"></svg>
- <div class="g" style="margin-top:10px">
-  <div><span>Best settings (fast/slow)</span><b id="bp"></b></div>
-  <div><span>In-sample return</span><b id="ins"></b></div>
-  <div><span>Unseen-data return</span><b id="oos"></b></div>
-  <div><span>Win rate · trades</span><b id="wr"></b></div>
-  <div><span>Max drawdown</span><b id="dd"></b></div>
-  <div><span>Overfit gap</span><b id="gap"></b></div>
-  <div><span>Live rule (10/30), unseen</span><b id="lv"></b></div>
-  <div><span>Underlying, same period</span><b id="bh"></b></div>
- </div>
- <p class="fine">Option P&L is a simplified model (ATM, ~30 days out, delta, gamma and daily time decay, 3% of equity per trade). No fills, spreads or fees. It trades the same rule as the live signal: long at agreement +2 or higher, short at −2 or lower, flat otherwise. Volatility here is realized, not implied, so judging real premium needs an options chain feed.</p>
-</section>
+    function updateExposure(positions, equity) {
+      const exposure = positions.filter(p => p.side === 'LONG').reduce((sum, p) => sum + Math.max(0, Number(p.avgEntryPrice) * Math.abs(Number(p.qty)) * 100), 0);
+      const cap = equity * maxTotalRiskPctUi;
+      const ratio = cap > 0 ? Math.min(100, exposure / cap * 100) : 0;
+      $('riskFill').style.width = `${ratio}%`;
+      setText('riskExposure', `${currency(exposure)} / ${currency(cap)}`);
+    }
 
-<section class="card">
- <h2>Broker</h2>
- <p class="mute">Orders go to your Alpaca paper account only (see Paper account above). Robinhood is not connected.</p>
- <button id="rh">Connect Robinhood</button>
- <div id="note" hidden>Connecting a real account needs a secure backend that holds your credentials and places orders. This page is public front-end code, so it never asks for logins or keys. Robinhood’s official programmatic access is limited, so check their current developer docs before building that layer.</div>
-</section>
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
+    }
 
-</details>
+    async function loadConfig() {
+      try {
+        const response = await fetch('/api/config', { cache: 'no-store' });
+        if (!response.ok) return;
+        const c = await response.json();
+        setText('riskPct', `${(c.riskPct * 100).toFixed(2)}%`);
+        maxTotalRiskPctUi = c.maxTotalRiskPct;
+        setText('totalRiskPct', `${(c.maxTotalRiskPct * 100).toFixed(2)}%`);
+        setText('maxPositions', String(c.maxPositions));
+        setText('maxEntries', String(c.maxDailyEntries));
+        setText('maxSpread', `${(c.maxSpread * 100).toFixed(0)}%`);
+        setText('targetDte', `${c.targetDteLow}–${c.targetDteHigh} days`);
+      } catch { /* config is supplemental; account status remains usable */ }
+    }
 
-<p class="fine" id="disc">Prices here are randomly generated, not real market data, and every signal and backtest result is illustrative. Options can lose their full premium. This is not financial advice.</p>
-</main>
-<script>
-const $=id=>document.getElementById(id),N=240;
-let live=false,J=null,P=[450],reg=.0003,vol=.0012,paused=false,runs=0,first=450;
-const gauss=()=>(Math.random()+Math.random()+Math.random()+Math.random()-2)*1.73;
-function step(x){if(Math.random()<.02){reg=(Math.random()-.5)*.0016;vol=.0007+Math.random()*.0018}return x*(1+reg+vol*gauss())}
-while(P.length<N)P.push(step(P[P.length-1]));first=P[P.length-1];
-const sma=(a,n,e=a.length)=>{let s=0;for(let i=e-n;i<e;i++)s+=a[i];return s/n};
-function rsi(a,e=a.length,n=14){let g=0,l=0;for(let i=e-n;i<e;i++){const d=a[i]-a[i-1];d>0?g+=d:l-=d}return l?100-100/(1+g/l):100}
-function rv(a,e,n=20){let r=[],m=0;for(let i=e-n;i<e;i++){const x=Math.log(a[i]/a[i-1]);r.push(x);m+=x}m/=n;return Math.sqrt(r.reduce((s,x)=>s+(x-m)**2,0)/n)}
-function score(a,e,F,S){const f=sma(a,F,e),s=sma(a,S,e),r=rsi(a,e),m=a[e-1]/a[e-11]-1;let sc=(f>s?1:-1)+(r>55?1:r<45?-1:0)+(m>.004?1:m<-.004?-1:0);if(r>78)sc--;if(r<22)sc++;return{sc,f,s,r,m}}
-const side=sc=>sc>=2?1:sc<=-2?-1:0;
-const pct=(x,d=1)=>(x>=0?"+":"")+(x*100).toFixed(d)+"%";
-const col=x=>x>=0?"up":"dn";
-const path=(a,w,h,lo,hi)=>a.map((v,i)=>(i/(a.length-1)*w).toFixed(1)+","+(h-(v-lo)/(hi-lo||1)*h).toFixed(1)).join(" ");
+    async function runScan() {
+      const button = $('scanBtn');
+      button.disabled = true;
+      button.textContent = 'Scanning…';
+      $('scanLog').textContent = 'Connecting to Alpaca Paper Trading…\nLoading daily bars and option chains…\nChecking position and risk rules…';
+      clearError();
+      try {
+        const response = await fetch('/api/run', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' });
+        const data = await response.json();
+        if (!response.ok || !data.ok) {
+          $('scanLog').textContent = data.output || data.error || 'Scan failed.';
+          showError(data.error || 'The paper scan did not complete.');
+        } else {
+          $('scanLog').textContent = data.output;
+          setText('scanTime', `Completed ${new Date(data.completedAt).toLocaleTimeString()}`);
+          await loadSummary();
+        }
+      } catch (error) {
+        $('scanLog').textContent = `Scan failed: ${error.message}`;
+        showError(`Scan failed: ${error.message}`);
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Run paper scan ↗';
+      }
+    }
 
-function render(){
- const last=P[P.length-1],{sc,f,s,r,m}=score(P,P.length,10,30);
- let rs=[];for(let i=40;i<=P.length;i+=2)rs.push(rv(P,i));
- const cur=rv(P,P.length),vr=rs.filter(x=>x<=cur).length/rs.length;
- const labs={3:"Bullish",2:"Bullish",1:"Leaning bullish",0:"Neutral","-1":"Leaning bearish","-2":"Bearish","-3":"Bearish"};
- const hi=vr>=.6;
- const play=sc>=2?(hi?"Idea: bull put spread (rich premium)":"Idea: long call, about 30 days out, near the money"):
-  sc<=-2?(hi?"Idea: bear call spread (rich premium)":"Idea: long put, about 30 days out, near the money"):
-  hi?"Idea: stay small or sell a wide iron condor":"Idea: stay flat until trend and momentum agree";
- const c=sc>0?"up":sc<0?"dn":"am";
- $("px").textContent=last.toFixed(2);
- $("chg").textContent=pct(last/first-1,2);$("chg").className="chg "+col(last-first);
- $("lab").textContent=labs[sc];$("lab").className=c;
- $("conf").textContent="Agreement "+Math.round(Math.abs(sc)/3*100)+"%";
- $("cbi").style.width=Math.max(6,Math.abs(sc)/3*100)+"%";$("cb").className="bar "+c;
- $("play").textContent=play;
- $("rsi").textContent=r.toFixed(0);
- $("tr").textContent=pct(f/s-1,2);$("tr").className=col(f-s);
- $("vr").textContent=Math.round(vr*100)+"th pct";
- $("mo").textContent=pct(m,2);$("mo").className=col(m);
- $("em").textContent="±$"+(last*cur*5.48).toFixed(2);
- const lt=last/sma(P,100)-1;$("lt").textContent=pct(lt,2);$("lt").className=col(lt);
- const W=120,pv=P.slice(-W),a1=[],a2=[];
- for(let i=P.length-W;i<P.length;i++){a1.push(sma(P,10,i+1));a2.push(sma(P,30,i+1))}
- const all=pv.concat(a1,a2),lo=Math.min(...all),h=Math.max(...all);
- $("ch").innerHTML='<polyline class="l3" points="'+path(a2,360,150,lo,h)+'"/><polyline class="l2" points="'+path(a1,360,150,lo,h)+'"/><polyline class="l1" points="'+path(pv,360,150,lo,h)+'"/>';
-}
-
-function bt(p,F,S){
- let eq=1,e=[1],pos=0,ent=1,tr=0,w=0,pk=1,dd=0,held=0;
- for(let i=S;i<p.length-1;i++){
-  const d=side(score(p,i+1,F,S).sc);
-  if(d!==pos){if(pos){tr++;if(eq>ent)w++}pos=d;ent=eq}
-  const sg=rv(p,i+1),p0=.4*p[i]*sg*5.48,dS=p[i+1]-p[i],g=.4/(p[i]*sg*5.48);
-  const r=d?Math.max(-1,(d*.5*dS+.5*g*dS*dS-p0/45)/p0):0;
-  eq*=1+.03*r;if(d)held++;e.push(eq);pk=Math.max(pk,eq);dd=Math.min(dd,eq/pk-1);
- }
- if(pos){tr++;if(eq>ent)w++}
- return{e,tr,w,ret:eq-1,dd,held};
-}
-function run(){
- if(paused)return;
- const train=P.slice(0,168);let best=null;
- for(const F of[5,8,12,16])for(const S of[20,30,40]){const b=bt(train,F,S);if(!best||b.ret>best.ret)best={...b,F,S}}
- const o=bt(P.slice(168-best.S),best.F,best.S),L=bt(P.slice(138),10,30),bh=P[P.length-1]/P[168]-1;HOLD=Math.round(L.held/Math.max(1,L.tr));runs++;$("bw").textContent=L.tr?Math.round(L.w/L.tr*100)+"% of "+L.tr+" trades":"–";$("bv").textContent=pct(L.ret-bh,1);$("bv").className=col(L.ret-bh);
- $("runs").textContent=runs;
- $("bp").textContent=best.F+" / "+best.S;
- $("ins").textContent=pct(best.ret);$("ins").className=col(best.ret);
- $("oos").textContent=pct(o.ret);$("oos").className=col(o.ret);
- $("wr").textContent=(o.tr?Math.round(o.w/o.tr*100):0)+"% · "+o.tr;
- $("dd").textContent=pct(o.dd);$("dd").className="dn";
- $("lv").textContent=pct(L.ret);$("lv").className=col(L.ret);$("bh").textContent=pct(bh);$("bh").className=col(bh);
- const gap=best.ret-o.ret;$("gap").textContent=pct(gap);$("gap").className=gap>.05?"am":"";
- const lo=Math.min(...o.e),h=Math.max(...o.e);
- $("eq").innerHTML='<polyline class="'+(o.ret>=0?"l2":"l3")+'" points="'+path(o.e,360,90,lo,h)+'"/>';
-}
-function tick(){if(paused||document.hidden)return;if(live)return pull();P.push(step(P[P.length-1]));P.shift();render()}
-$("pz").onclick=()=>{paused=!paused;$("pz").textContent=paused?"Resume":"Pause";$("st").className="sub"+(paused?" off":"");$("stt").textContent=paused?"Paused":"Demo feed, updating every second"};
-$("rh").onclick=()=>{const n=$("note");n.hidden=!n.hidden};
-const Q=new URLSearchParams(location.search),cache=new Map();let E={};
-try{E={ALPACA_KEY:localStorage.getItem("ak"),ALPACA_SECRET:localStorage.getItem("as")}}catch(e){}
-const memo=async(k,ms,fn)=>{const c=cache.get(k);if(c&&Date.now()-c.t<ms){if(c.e)throw c.e;return c.v}try{const v=await fn();cache.set(k,{t:Date.now(),v});return v}catch(e){cache.set(k,{t:Date.now(),e});throw e}};
-const get=async(u,h)=>{const r=await fetch(u,{headers:h});if(!r.ok)throw new Error("Alpaca HTTP "+r.status);return r.json()};
-const need=()=>{if(!E.ALPACA_KEY||!E.ALPACA_SECRET)throw new Error("add your Alpaca keys")};
-const et=ms=>new Date(ms).toLocaleDateString("en-CA",{timeZone:"America/New_York"});
-const ah=()=>({"APCA-API-KEY-ID":E.ALPACA_KEY,"APCA-API-SECRET-KEY":E.ALPACA_SECRET});
-const days=e=>Math.round((Date.parse(e)-Date.now())/864e5),A="https://data.alpaca.markets/";
-async function alpacaBars(s){need();const j=await get(A+"v2/stocks/"+s+"/bars?timeframe=1Day&feed=iex&adjustment=split&limit=1000&start="+new Date(Date.now()-400*864e5).toISOString(),ah());
- if(!j.bars||!j.bars.length)throw new Error("no bars");return{dates:j.bars.map(b=>b.t.slice(0,10)),closes:j.bars.map(b=>b.c)}}
-async function alpacaQuote(s){need();const j=await get(A+"v2/stocks/"+s+"/trades/latest?feed=iex",ah());return{price:j.trade.p}}
-function pick(rows,price){
- const by={};for(const r of rows)(by[r.expiry]=by[r.expiry]||[]).push(r);
- const ex=Object.keys(by).filter(e=>days(e)>=14).sort((a,b)=>Math.abs(days(a)-30)-Math.abs(days(b)-30))[0];
- if(!ex)throw new Error("no expiry near 30 days");
- const ks=[...new Set(by[ex].map(r=>r.strike))].sort((a,b)=>Math.abs(a-price)-Math.abs(b-price));
- for(const k of ks){const c=by[ex].find(r=>r.strike===k&&r.type==="C"),p=by[ex].find(r=>r.strike===k&&r.type==="P");
-  if(c&&p&&c.ask>0&&p.ask>0&&c.iv>0&&p.iv>0)return{expiry:ex,dte:days(ex),strike:k,call:c,put:p,rows:by[ex]}}
- throw new Error("no liquid at-the-money pair")}
-async function alpacaChain(s,price){need();const d=n=>new Date(Date.now()+n*864e5).toISOString().slice(0,10);
- const j=await get(A+"v1beta1/options/snapshots/"+s+"?feed=indicative&limit=1000&expiration_date_gte="+d(14)+"&expiration_date_lte="+d(45)+"&strike_price_gte="+(price*.97).toFixed(2)+"&strike_price_lte="+(price*1.03).toFixed(2),ah());
- const rows=Object.entries(j.snapshots||{}).map(([k,v])=>{const m=k.match(/^([A-Z]+)(\d{6})([CP])(\d{8})$/);if(!m)return;const t=m[2];
-  return{sym:k,expiry:"20"+t.slice(0,2)+"-"+t.slice(2,4)+"-"+t.slice(4),type:m[3],strike:+m[4]/1e3,bid:v.latestQuote&&v.latestQuote.bp,ask:v.latestQuote&&v.latestQuote.ap,delta:v.greeks&&v.greeks.delta,iv:v.impliedVolatility}}).filter(Boolean);
- return pick(rows,price)}
-async function state(s){
- const errors={},b=await memo("b"+s,3e5,()=>alpacaBars(s));let q=null,chain=null;
- try{q=await memo("q"+s,1e3,()=>alpacaQuote(s))}catch(e){errors.quote=e.message}
- const price=q?q.price:b.closes[b.closes.length-1],n=b.dates.length,cut=b.dates[n-1]===et(Date.now())?n-1:n;
- try{chain=await memo("c"+s,15e3,()=>alpacaChain(s,price))}catch(e){errors.chain=e.message}
- return{sym:s,price,closes:b.closes.slice(0,cut),src:{bars:"Alpaca",chain:chain?"Alpaca":"none"},chain,macro:null,errors}}
-let HOLD=0,SYM=(Q.get("s")||"SPY").toUpperCase().replace(/[^A-Z.]/g,"").slice(0,6),pc=0,IDEAS=[],AC=null,auto=false,busy=false,tk=null,JN=[];
-try{JN=JSON.parse(localStorage.getItem("jn")||"[]")}catch(e){}
-const logJ=x=>{JN.push(x);try{localStorage.setItem("jn",JSON.stringify(JN.slice(-300)))}catch(e){}};
-const capNow=()=>$("acct").value*$("rk").value/100,money=x=>(x<0?"-$":"$")+Math.abs(x).toFixed(2);
-const occ=s=>{const m=s.match(/^([A-Z]+)(\d{6})([CP])(\d{8})$/);return m&&{root:m[1],exp:"20"+m[2].slice(0,2)+"-"+m[2].slice(2,4)+"-"+m[2].slice(4),type:m[3],strike:+m[4]/1e3}};
-const tr=async(m,p,b)=>{need();const r=await fetch("https://paper-api.alpaca.markets/"+p,{method:m,headers:Object.assign({"content-type":"application/json"},ah()),body:b?JSON.stringify(b):undefined});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.message||"Alpaca HTTP "+r.status);return j};
-function ideasDraw(){
- const c=J&&J.chain;$("idc").hidden=!c;$("pa").hidden=false;$("sc").hidden=false;if(!c){IDEAS=[];return}
- const sd=side(score(P,P.length,10,30).sc),rvv=rv(P,P.length)*Math.sqrt(252),px=J.price,cap=capNow(),want=sd>0?"C":sd<0?"P":"";
- IDEAS=c.rows.filter(r=>r.ask>0&&r.iv>0).map(r=>{const bid=r.bid||0,mid=(r.ask+bid)/2,sp=(r.ask-bid)/mid,be=r.type==="C"?r.strike+r.ask:r.strike-r.ask,mv=r.type==="C"?be/px-1:1-be/px,ivp=r.iv/rvv-1,risk=r.ask*100;
-  return Object.assign({},r,{mid,sp,be,mv,ivp,risk,ok:risk<=cap&&sp<=.1,sc:Math.max(0,Math.min(100,Math.round(100-Math.min(.3,sp)*200-Math.min(1,Math.max(0,ivp))*30-Math.min(.1,Math.max(0,mv))*400+(r.type===want?15:-25)-(risk>cap?20:0))))})}).sort((a,b)=>b.sc-a.sc).slice(0,6);
- $("idl").innerHTML=IDEAS.map((r,i)=>'<button class="rw" data-i="'+i+'"><span><b>'+(r.type==="C"?"Call ":"Put ")+r.strike+'</b> · '+r.expiry.slice(5)+'<br><span class="sub">$'+r.ask.toFixed(2)+' · delta '+(r.delta||0).toFixed(2)+' · needs '+pct(Math.max(0,r.mv),1)+' move · risk $'+r.risk.toFixed(0)+(r.ok?"":" · over limit or wide spread")+'</span></span><b class="'+(r.ok?"up":"am")+'">'+r.sc+'</b></button>').join("")||'<p class="mute">No liquid contracts found.</p>'}
-const tkMsg=()=>{const q=+$("tq").value,p=+$("tp").value;$("tmsg").textContent="Paper order: buy "+q+" at up to "+money(p)+". Most you can lose: "+money(q*p*100)+". Your limit: "+money(capNow())+"."};
-$("idl").onclick=e=>{const b=e.target.closest("[data-i]");if(!b)return;tk=IDEAS[+b.dataset.i];$("tk").hidden=false;$("tkt").textContent=(tk.type==="C"?"Call ":"Put ")+tk.strike+" · "+tk.expiry+" · break-even "+tk.be.toFixed(2);$("tq").value=Math.max(1,Math.floor(capNow()/tk.risk));$("tp").value=tk.ask.toFixed(2);tkMsg()};
-$("tq").oninput=$("tp").oninput=tkMsg;$("tx").onclick=()=>{$("tk").hidden=true};
-async function order(sym,q,p,why){const o=await tr("POST","v2/orders",{symbol:sym,qty:String(q),side:"buy",type:"limit",limit_price:p.toFixed(2),time_in_force:"day"});logJ({t:Date.now(),a:"buy",sym,qty:q,lp:p,why});await loadAcct();return o}
-$("tgo").onclick=async()=>{try{$("tgo").disabled=true;await order(tk.sym,+$("tq").value,+$("tp").value,"manual");$("tk").hidden=true}catch(e){$("tmsg").textContent="Order failed: "+e.message}$("tgo").disabled=false};
-async function loadAcct(){try{const[a,p,c]=await Promise.all([tr("GET","v2/account"),tr("GET","v2/positions"),tr("GET","v2/clock")]);AC={a,p,c};drawAcct();drawHome()}catch(e){$("am").textContent="Paper account: "+e.message+(/40[13]|forbidden|unauthor/i.test(e.message)?" (use paper keys)":"")}}
-function drawAcct(){const a=AC.a,o=AC.p.filter(p=>p.asset_class==="us_option");
- $("am").textContent="Equity "+money(+a.equity)+" · buying power "+money(+a.buying_power)+" · market "+(AC.c.is_open?"open":"closed");
- $("pos").innerHTML=o.map(p=>{const m=occ(p.symbol)||{},pl=+p.unrealized_pl;return '<div class="rw"><span><b>'+(m.root||p.symbol)+" "+(m.type==="C"?"Call ":"Put ")+m.strike+'</b> x'+p.qty+'<br><span class="sub">in '+money(+p.avg_entry_price)+' · now '+money(+p.current_price)+'</span></span><span><b class="'+(pl>=0?"up":"dn")+'">'+money(pl)+'</b> <button data-c="'+p.symbol+'">Close</button></span></div>'}).join("")||'<p class="mute">No open option positions.</p>';
- const cl=JN.filter(x=>x.a==="close"),w=cl.filter(x=>x.pnl>0).length,t=cl.reduce((s,x)=>s+x.pnl,0);
- $("jn").textContent=cl.length+" closed trades · "+(cl.length?Math.round(w/cl.length*100):0)+"% wins · "+money(t)+" total (approx). Judge it after 30."}
-async function closePos(p,why){await tr("DELETE","v2/positions/"+p.symbol);logJ({t:Date.now(),a:"close",sym:p.symbol,pnl:+p.unrealized_pl,why});await loadAcct()}
-$("pos").onclick=async e=>{const b=e.target.closest("[data-c]");if(!b)return;const p=AC.p.find(x=>x.symbol===b.dataset.c);try{await closePos(p,"manual")}catch(x){$("am").textContent="Close failed: "+x.message}};
-const setAuto=(on,m)=>{auto=on;$("auto").textContent="Auto paper trading: "+(on?"On":"Off");$("amsg").textContent=m||"Rules: buys the top passing contract when the signal is strong. Max 1 new trade a day, max 3 open. Exits at -40%, +60%, a signal flip, or under 7 days left. Stops for the day if the account drops 3%."};
-setAuto(false);
-$("auto").onclick=()=>{if(!auto&&!confirm("Auto mode places PAPER orders by itself while this page is open and the market is open. Turn it on?"))return;setAuto(!auto)};
-async function autoStep(){
- if(!auto||busy||!AC||!AC.c.is_open||!J)return;busy=true;
- try{const a=AC.a,sd=side(score(P,P.length,10,30).sc);
-  if(+a.last_equity&&+a.equity/+a.last_equity-1<-.03){setAuto(false,"Auto stopped: account is down more than 3% today.");return}
-  for(const p of AC.p){if(p.asset_class!=="us_option")continue;const m=occ(p.symbol),pl=+p.unrealized_plpc;
-   const why=pl<=-.4?"stop loss -40%":pl>=.6?"take profit +60%":days(m.exp)<7?"expiry within 7 days":(m.root===J.sym&&((m.type==="C"&&sd<0)||(m.type==="P"&&sd>0)))?"signal flipped":"";
-   if(why)await closePos(p,"auto: "+why)}
-  const n=AC.p.filter(p=>p.asset_class==="us_option").length,d=new Date().toDateString();
-  if(sd&&n<3&&!JN.some(x=>x.a==="buy"&&String(x.why).startsWith("auto")&&new Date(x.t).toDateString()===d)){
-   const t=IDEAS.find(i=>i.ok&&i.type===(sd>0?"C":"P")&&!AC.p.some(p=>p.symbol===i.sym));
-   if(t)await order(t.sym,Math.max(1,Math.floor(capNow()/t.risk)),t.ask,"auto: signal "+sd)}
- }catch(e){$("amsg").textContent="Auto error: "+e.message}finally{busy=false}}
-const WL="SPY QQQ IWM DIA XLF XLK XLE XLV XLY XLI XLP XLU SMH GLD TLT AAPL MSFT NVDA AMZN GOOGL META TSLA AMD NFLX AVGO CRM ORCL ADBE INTC QCOM MU COST WMT HD LOW NKE MCD SBUX DIS BA CAT DE GE JPM BAC WFC GS MS C V MA PYPL UNH LLY JNJ PFE MRK ABBV XOM CVX COP KO PEP PG T VZ CSCO IBM UBER SHOP PLTR COIN SOFI F GM".split(" ");
-async function scan(){const j=await memo("scan",3e5,()=>get(A+"v2/stocks/bars?symbols="+WL.join(",")+"&timeframe=1Day&feed=iex&adjustment=split&limit=10000&start="+new Date(Date.now()-110*864e5).toISOString(),ah()));
- const LB={3:"Bullish",2:"Bullish",1:"Leaning bullish",0:"Neutral","-1":"Leaning bearish","-2":"Bearish","-3":"Bearish"};
- const RA=WL.map(s=>{const c=((j.bars||{})[s]||[]).map(b=>b.c);if(c.length<40)return null;return{s,p:c[c.length-1],x:score(c,c.length,10,30)}}).filter(Boolean).sort((a,b)=>Math.abs(b.x.sc)-Math.abs(a.x.sc)||Math.abs(b.x.m)-Math.abs(a.x.m));SCNN=RA.filter(r=>Math.abs(r.x.sc)>=2).length;const R=RA.slice(0,12);
- $("scn").innerHTML=R.map(({s,p,x})=>'<button class="rw" data-s="'+s+'"><span><b>'+s+'</b> $'+p.toFixed(2)+'<br><span class="sub">'+(x.sc>=2?"Buy a call":x.sc<=-2?"Buy a put":"Skip")+' · strength '+Math.round(Math.abs(x.sc)/3*100)+'% · RSI '+x.r.toFixed(0)+'</span></span><b class="'+(x.sc>0?"up":x.sc<0?"dn":"am")+'">'+LB[x.sc]+'</b></button>').join("")}
-$("scn").onclick=e=>{const b=e.target.closest("[data-s]");if(b){SYM=b.dataset.s;J=null;IDEAS=[];$("oc").hidden=true;$("idc").hidden=true;pull()}};
-let HP="1D",HD=null,WS=null,SCNN=0;const RT={};
-const rate=(k,ms,f)=>{if(Date.now()-(RT[k]||0)>ms){RT[k]=Date.now();f()}};
-const PER={"1D":"period=1D&timeframe=5Min","1W":"period=1W&timeframe=1H","1M":"period=1M&timeframe=1D","1Y":"period=1A&timeframe=1D"};
-async function homeLoad(){try{const h=await tr("GET","v2/account/portfolio/history?"+PER[HP]);HD=(h.equity||[]).filter(x=>x!=null);drawHome()}catch(e){$("hc").textContent="Account: "+e.message}}
-function drawHome(){const a=AC&&AC.a;if(!a)return;const eq=+a.equity,pv=+a.last_equity||eq,d=eq-pv;
- $("hb").textContent=money(eq);$("hc").textContent=(d>=0?"+":"-")+"$"+Math.abs(d).toFixed(2)+" today ("+pct(d/pv,2)+")";$("hc").className="chg "+col(d);
- const p=HD||[];if(p.length<2){$("hch").innerHTML="";return}
- $("hch").innerHTML='<polyline class="'+(p[p.length-1]>=p[0]?"l2 t":"l4")+'" points="'+path(p,360,120,Math.min(...p),Math.max(...p))+'"/>'}
-$("hp").onclick=e=>{const b=e.target.closest("[data-p]");if(!b)return;HP=b.dataset.p;[...$("hp").children].forEach(x=>x.classList.toggle("on",x===b));homeLoad()};
-async function statsLoad(){try{const o=await tr("GET","v2/orders?status=closed&limit=500&direction=asc"),lots={},res=[];
- for(const x of o.filter(x=>+x.filled_qty>0&&occ(x.symbol))){let q=+x.filled_qty;const pr=+x.filled_avg_price;
-  if(x.side==="buy")(lots[x.symbol]=lots[x.symbol]||[]).push({q,pr});
-  else{let pnl=0,m=0;const L=lots[x.symbol]||[];while(q>0&&L.length){const t=Math.min(q,L[0].q);pnl+=(pr-L[0].pr)*t*100;L[0].q-=t;q-=t;m+=t;if(L[0].q<=0)L.shift()}if(m)res.push(pnl)}}
- WS=res;drawStats()}catch(e){$("wnote").textContent="Results: "+e.message}}
-function drawStats(){const r=WS||[],n=r.length,w=r.filter(x=>x>0),l=r.filter(x=>x<=0),tot=r.reduce((s,x)=>s+x,0),av=a=>a.length?money(a.reduce((s,x)=>s+x,0)/a.length):"$0";
- $("wn").textContent=n;$("wr2").textContent=n?Math.round(w.length/n*100)+"%":"–";$("wal").textContent=n?av(w)+" / "+av(l):"–";
- $("wpl").textContent=n?money(tot):"–";$("wpl").className=tot>=0?"up":"dn";
- $("wnote").textContent=!n?"Waiting for your first closed trade.":n<30?"Only "+n+" closed trade"+(n>1?"s":"")+" so far. Under 30, a win rate swings by luck, so don't trust it yet.":"A high win rate alone isn't enough. Compare average win to average loss and total profit."}
-function drawBots(){const x=J?score(P,P.length,10,30).sc:0,sd=side(x);
- const rows=[["Scanner","Watching about 80 stocks and ETFs",SCNN+" strong","up"],["Analyst",J?J.sym+": "+(sd>0?"call setup":sd<0?"put setup":"no setup"):"Waiting for data",J?Math.round(Math.abs(x)/3*100)+"%":"–",sd?"up":"am"],["Executor",auto?"Placing paper trades by itself":"Auto trading is off. Tap to turn on.",auto?"On":"Off",auto?"up":"am"]];
- $("bots").innerHTML=rows.map((r,i)=>'<button class="rw" data-b="'+i+'"><span><span class="dotg'+(i===2&&!auto?" off":"")+'"></span><b>'+r[0]+'</b><br><span class="sub">'+r[1]+'</span></span><b class="'+r[3]+'">'+r[2]+'</b></button>').join("")}
-$("bots").onclick=e=>{if(e.target.closest('[data-b="2"]')){$("auto").onclick();drawBots()}};
-async function pull(){
- try{
-  const j=await state(SYM);
-  if(j.closes.length<239)throw new Error("needs 239+ daily bars");
-  J=j;live=true;P=j.closes.slice(-239).concat(j.price);first=P[P.length-2];
-  $("stt").textContent="Live · "+j.src.bars+" prices, "+j.src.chain+" options";
-  $("who").textContent=j.sym+" · change vs prior close";
-  $("disc").textContent="Prices come from the sources shown above, and options are usually delayed about 15 minutes. Win rates under Results come from your real paper trades. Backtests are simulated. Options can lose their full premium. This is not financial advice.";
-  chain();render();ideasDraw();scan().catch(()=>{});rate("h",6e4,homeLoad);rate("s",3e4,statsLoad);drawBots();drawHome();if(pc++%5===0)loadAcct();autoStep();
- }catch(e){const m=e instanceof TypeError?"the browser blocked the data request":e.message;$("stt").textContent=live?"Data error: "+m:"Demo feed ("+m+")";if(/keys|40[13]/.test(m))$("ks").hidden=false}
-}
-function chain(){
- if(!J)return;$("oc").hidden=false;const c=J.chain,ids=["c1","c2","c3","c4","c5","c6","c7","c8"];
- if(!c){$("ocs").textContent="No options data: "+(J.errors.chain||"unknown");ids.forEach(k=>$(k).textContent="–");$("verdict").textContent="";return}
- const sd=side(score(P,P.length,10,30).sc),o=sd<0?c.put:c.call,bid=o.bid||0,mid=(bid+o.ask)/2,sp=(o.ask-bid)/mid,rvv=rv(P,P.length)*Math.sqrt(252),ivp=o.iv/rvv-1,risk=o.ask*100,cap=$("acct").value*$("rk").value/100,n=Math.floor(cap/risk),M=J.macro;
- $("ocs").textContent=J.sym+" options near 30 days out, nearest strike. Source: "+J.src.chain+".";
- $("c1").textContent=(sd<0?"Put ":"Call ")+c.strike+" · "+c.expiry.slice(5)+" ("+c.dte+"d)";
- $("c2").textContent="$"+bid.toFixed(2)+" / $"+o.ask.toFixed(2);
- $("c3").textContent=(o.delta??0).toFixed(2)+" · "+(o.iv*100).toFixed(0)+"%";
- $("c4").textContent=pct(ivp,0);$("c4").className=ivp>.25?"am":"";
- $("c5").textContent="$"+risk.toFixed(0);$("c6").textContent=n;$("c6").className=n<1?"dn":"";
- $("c7").textContent=J.src.bars+" (IEX)";
- $("c8").textContent="~15 min";
- const v=[];
- if(!sd)v.push("No signal right now. Staying out is a position.");
- if(sp>.1)v.push("The bid/ask gap is "+Math.round(sp*100)+"% of the price, which eats any edge.");
- if(ivp>.25)v.push("Implied vol is well above realized, so these options look expensive.");
- if(n<1)v.push("One contract risks $"+risk.toFixed(0)+", above your $"+cap.toFixed(0)+" limit. Skip it.");
- $("plan").textContent=sd?"Plan: buy the "+(sd<0?"put":"call")+" at or under the ask. Signal strength "+Math.round(Math.abs(score(P,P.length,10,30).sc)/3*100)+"%. Hold up to about "+Math.max(3,Math.min(15,c.dte-7))+" days. Sell at +60%, cut at -40%, or sooner if the signal flips or 7 days are left. Backtest average hold: "+(HOLD||"?")+" days.":"Plan: no entry right now. Wait for the signal to read Bullish or Bearish.";
- $("verdict").textContent=v.length?v.join(" "):"Passes the basic filters. Paper trade it first and log at least 30 trades before risking real money.";
-}
-$("acct").oninput=$("rk").oninput=()=>chain();
-document.addEventListener("visibilitychange",()=>{if(!document.hidden)pull()});
-if(!E.ALPACA_KEY)$("ks").hidden=false;
-$("ksave").onclick=()=>{const a=$("kid").value.trim(),b=$("ksec").value.trim();try{localStorage.setItem("ak",a);localStorage.setItem("as",b)}catch(e){}E={ALPACA_KEY:a,ALPACA_SECRET:b};cache.clear();$("ks").hidden=true;pull()};
-const safe=f=>()=>{try{f()}catch(e){console.error(e)}};safe(render)();safe(run)();pull();setInterval(safe(tick),1000);setInterval(safe(run),2000);
-</script></body></html>
+    $('refreshBtn').addEventListener('click', loadSummary);
+    $('testBtn').addEventListener('click', loadSummary);
+    $('scanBtn').addEventListener('click', runScan);
+    loadConfig();
+    loadSummary();
+    setInterval(loadSummary, 60_000);
+  </script>
+</body>
+</html>
