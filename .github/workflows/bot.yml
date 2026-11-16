@@ -1,0 +1,23 @@
+name: Options Desk Bot
+
+on:
+  schedule:
+    # Runs at ~9:45, 14:45 and 15:45 US Eastern on weekdays
+    - cron: "45 14,19,20 * * 1-5"
+  workflow_dispatch:   # allows manual runs from the Actions tab
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Options Desk bot
+        run: node bot.mjs
+        env:
+          ALPACA_KEY: ${{ secrets.ALPACA_KEY }}
+          ALPACA_SECRET: ${{ secrets.ALPACA_SECRET }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}   # optional
+          AUTO: ${{ vars.AUTO }}
+          FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
